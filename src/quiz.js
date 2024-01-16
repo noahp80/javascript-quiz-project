@@ -26,14 +26,21 @@ class Quiz {
         this.correctAnswers++;
       }
     }
-  
-    hasEnded() {
+  hasEnded() {
       return this.currentQuestionIndex === this.questions.length;
     }
-         filterQuestionsByDifficulty(difficulty) {
-        const difficultysetting = difficulty.filter(this.questions => 
-            return difficultysetting); 
-        };
     
-      
+    filterQuestionsByDifficulty(difficulty) {
+      if (typeof difficulty !== 'number' || difficulty < 1 || difficulty > 3) {
+        const filteredQuestions = this.questions.filter(question => question.difficulty === difficulty);
+        return filteredQuestions;
+      }
+    }
+  
+    averageDifficulty() {
+      const totalDifficulty = this.questions.reduce((acc, question) => acc + question.difficulty, 0);
+      const averageDifficulty = totalDifficulty / this.questions.length;
+      return averageDifficulty;
+    }
   }
+    
